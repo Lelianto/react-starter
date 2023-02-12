@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from 'src/pages/Home';
 import About from 'src/pages/About';
+import 'src/App.css';
 
 const App = () => {
   return (
