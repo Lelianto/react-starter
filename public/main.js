@@ -23,8 +23,8 @@ function createWindow() {
   win.loadURL(
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`,
   );
-  // disable the code below to disable the inspect element
-  win.webContents.openDevTools();
+  // unable the code below to show the inspect element
+  // win.webContents.openDevTools();
 }
 
 app.on('ready', createWindow);
