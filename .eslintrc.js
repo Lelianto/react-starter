@@ -26,9 +26,12 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
-    "react/function-component-definition": [1, {
-      "namedComponents": "arrow-function",
-      "unnamedComponents": "arrow-function"
-    }]
+    'react/function-component-definition': [
+      1,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
 };
