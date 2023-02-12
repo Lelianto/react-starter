@@ -1,6 +1,13 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,5 +19,61 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-export const app = initializeApp(firebaseConfig);
-export const database = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const database = getFirestore(app);
+const auth = getAuth(app);
+
+const getUserByUid = async (uid) => {
+  const q = query(collection(database, 'accounts'), where('uid', '==', uid));
+  const docs = await getDocs(q);
+  let userData = {};
+  docs.docs.forEach((doc) => {
+    userData = doc.data();
+  });
+  return userData;
+};
+
+const registerWithEmailAndPassword = async (data) => {
+  const { username, password, email, phone, role, fullName, address } = data;
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const { user } = res;
+    await addDoc(collection(database, 'accounts'), {
+      uid: user.uid,
+      username,
+      fullName,
+      role,
+      authProvider: 'local',
+      email,
+      phone,
+      address,
+    });
+    return user;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+};
+
+const logInWithEmailAndPassword = async (email, password) => {
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    return user;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+};
+
+const logout = () => {
+  signOut(auth);
+};
+
+export {
+  auth,
+  database,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  getUserByUid,
+  logout,
+};

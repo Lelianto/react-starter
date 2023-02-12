@@ -24,7 +24,7 @@ function createWindow() {
     isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`,
   );
   // unable the code below to show the inspect element
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 }
 
 app.on('ready', createWindow);
