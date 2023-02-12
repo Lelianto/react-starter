@@ -12,8 +12,7 @@ const Home = () => {
       <button
         type="button"
         onClick={goToAbout}
-        className="bg-blue-500 px-4 text-white ml-4 rounded-full"
-      >
+        className="bg-blue-500 px-4 text-white ml-4 rounded-full">
         About
       </button>
     </div>

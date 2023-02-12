@@ -13,8 +13,7 @@ const About = () => {
         <button
           type="button"
           onClick={goToHome}
-          className="bg-blue-500 px-4 text-white ml-4 rounded-full"
-        >
+          className="bg-blue-500 px-4 text-white ml-4 rounded-full">
           Home
         </button>
       </div>
