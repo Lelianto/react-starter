@@ -11,6 +11,13 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['.'],
+      },
+    },
+  },
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [
@@ -19,5 +26,9 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+    "react/function-component-definition": [1, {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }]
   },
 };
